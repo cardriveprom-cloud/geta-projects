@@ -1,963 +1,404 @@
+
 <!DOCTYPE html>
-<html lang="he" dir="rtl" class="scroll-smooth">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I.M Flow | דפי נחיתה, אתרים ואוטומציות לעסקים ולעצמאיים</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Rubik', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            cyan: '#00f0ff',
-                            blue: '#3b82f6',
-                            orange: '#ff6b00',
-                            purple: '#8b5cf6',
-                            dark: '#070a13',
-                            card: '#0f172a',
-                        }
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'spin-slow': 'spin 15s linear infinite',
-                        'bounce-short': 'bounceShort 1s infinite',
-                        'beam-pulse': 'beamPulse 4s ease-in-out infinite alternate',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        },
-                        bounceShort: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-6px)' }
-                        },
-                        beamPulse: {
-                            '0%': { opacity: '0.4', transform: 'scaleX(1)' },
-                            '100%': { opacity: '0.85', transform: 'scaleX(1.15)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <title>גטה י.ג.מ - שיפוצים | שדרוג הבית, שיפור החיים</title>
     <style>
         :root {
-            --bg-base: #060913;
-            --accent-primary: #00f0ff;
-            --accent-secondary: #ff6b00;
-            --accent-tertiary: #8b5cf6;
+            --primary-color: #d4af37; /* Gold */
+            --dark-color: #111111;
+            --light-color: #f9f9f9;
+            --gray-color: #222222;
         }
-
-        body.theme-sunset {
-            --accent-primary: #ff6b00;
-            --accent-secondary: #00f0ff;
-            --accent-tertiary: #f43f5e;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
-
-        body.theme-royal {
-            --accent-primary: #6366f1;
-            --accent-secondary: #38bdf8;
-            --accent-tertiary: #f59e0b;
-        }
-
-        body.theme-cyber {
-            --accent-primary: #00f0ff;
-            --accent-secondary: #ff6b00;
-            --accent-tertiary: #8b5cf6;
-        }
-
         body {
-            background-color: var(--bg-base);
-            color: #f3f4f6;
-            font-family: 'Rubik', sans-serif;
-            overflow-x: hidden;
-            position: relative;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
         }
-
-        .cyber-grid {
-            background-image: 
-                linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 107, 0, 0.05) 1px, transparent 1px);
-            background-size: 45px 45px;
-            mask-image: radial-gradient(circle at 50% 30%, black 40%, transparent 85%);
-            -webkit-mask-image: radial-gradient(circle at 50% 30%, black 40%, transparent 85%);
-        }
-
-        .hero-beam {
-            background: linear-gradient(180deg, 
-                rgba(0, 240, 255, 0.2) 0%, 
-                rgba(255, 107, 0, 0.15) 40%, 
-                rgba(6, 9, 19, 0) 100%);
-            filter: blur(60px);
-        }
-
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-        }
-
-        .glass-panel-hover {
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .glass-panel-hover:hover {
-            background: rgba(30, 41, 59, 0.85);
-            border-color: rgba(0, 240, 255, 0.4);
-            box-shadow: 0 15px 35px -5px rgba(0, 240, 255, 0.25), 0 0 20px rgba(255, 107, 0, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 50%, #ff6b00 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .gradient-text-orange {
-            background: linear-gradient(135deg, #ff6b00 0%, #ffaa00 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .gradient-btn {
-            background: linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #ff6b00 100%);
-            background-size: 200% 200%;
-            transition: all 0.4s ease;
-        }
-
-        .gradient-btn:hover {
-            background-position: right center;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
-            transform: translateY(-2px) scale(1.02);
-        }
-
-        .gradient-btn-orange {
-            background: linear-gradient(135deg, #ff6b00 0%, #ff3b00 50%, #ffaa00 100%);
-            transition: all 0.3s ease;
-        }
-
-        .gradient-btn-orange:hover {
-            box-shadow: 0 0 25px rgba(255, 107, 0, 0.6);
-            transform: translateY(-2px) scale(1.02);
-        }
-
-        #particleCanvas {
+        /* תפריט ניווט עליון */
+        nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.75;
+            background-color: rgba(17, 17, 17, 0.95);
+            border-bottom: 2px solid var(--primary-color);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 12px 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        nav a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            color: var(--dark-color);
+            background-color: var(--primary-color);
         }
 
-        ::-webkit-scrollbar {
-            width: 8px;
+        header {
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('88.jpeg') no-repeat center center/cover;
+            padding: 130px 20px 70px;
+            text-align: center;
+            border-bottom: 4px solid var(--primary-color);
         }
-        ::-webkit-scrollbar-track {
-            background: #060913;
+        .logo-container img {
+            max-width: 350px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin: 20px 0 10px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00f0ff;
+        .slogan {
+            font-size: 1.3rem;
+            color: #ddd;
+            margin-bottom: 20px;
         }
-
-        .reveal-slide-right {
-            opacity: 0;
-            transform: translateX(80px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.4);
+            margin: 10px;
         }
-
-        .reveal-slide-left {
-            opacity: 0;
-            transform: translateX(-80px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
+        .cta-btn:hover {
+            background-color: #fff;
+            transform: translateY(-3px);
         }
-
-        .reveal-active {
-            opacity: 1 !important;
-            transform: translateX(0) !important;
+        section {
+            padding: 80px 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-
-        body.acc-large-text { font-size: 115% !important; }
-        body.acc-large-text h1 { font-size: 3.5rem !important; }
-        body.acc-high-contrast { background-color: #000000 !important; color: #ffffff !important; filter: contrast(140%); }
-        body.acc-high-contrast .glass-panel { background: #000000 !important; border: 1px solid #ffffff !important; }
-        body.acc-grayscale { filter: grayscale(100%); }
-        body.acc-underline-links a { text-decoration: underline !important; text-underline-offset: 4px; }
-        body.acc-readable-font { font-family: Arial, sans-serif !important; }
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+        }
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .service-card {
+            background: var(--gray-color);
+            border: 1px solid #333;
+            padding: 30px 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        .service-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item {
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+        .gallery-item img, .gallery-item video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-desc {
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .features-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: #151515;
+            padding: 40px 20px;
+            border-radius: 10px;
+            border: 1px solid var(--primary-color);
+        }
+        .feature-item {
+            text-align: center;
+            flex: 1;
+            min-width: 180px;
+        }
+        .feature-item p {
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        .about-box {
+            background: #181818;
+            border: 1px solid #333;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .about-box p {
+            font-size: 1.15rem;
+            color: #ddd;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .step-card {
+            background: #1c1c1c;
+            border-right: 4px solid var(--primary-color);
+            padding: 25px;
+            border-radius: 8px;
+        }
+        .step-card h4 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: #0a0a0a;
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 2px solid var(--primary-color);
+        }
+        .phone-big {
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin: 15px 0;
+        }
     </style>
 </head>
-<body class="theme-cyber relative antialiased selection:bg-cyan-400 selection:text-black">
+<body>
 
-    <canvas id="particleCanvas"></canvas>
-    <div class="fixed inset-0 cyber-grid pointer-events-none z-0"></div>
-    <div class="fixed -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] hero-beam rounded-full pointer-events-none z-0 animate-beam-pulse"></div>
+    <!-- תפריט ניווט מהיר -->
+    <nav>
+        <a href="#about">אודות</a>
+        <a href="#features">למה אנחנו?</a>
+        <a href="#services">השירותים שלנו</a>
+        <a href="#process">תהליך העבודה</a>
+        <a href="#gallery">גלריית תמונות</a>
+        <a href="#videos">סרטונים</a>
+        <a href="#contact">יצירת קשר</a>
+    </nav>
 
-    <header class="sticky top-0 z-40 w-full glass-panel border-b border-white/10 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl gradient-btn-orange flex items-center justify-center text-white font-black text-xl shadow-lg shadow-orange-500/20 group-hover:rotate-12 transition-transform">
-                    <i class="fa-solid fa-code"></i>
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-xl font-black tracking-wider text-white">I.M <span class="gradient-text">FLOW</span></span>
-                    <span class="text-[10px] text-cyan-400 font-medium tracking-widest -mt-1">WEB & AUTOMATION</span>
-                </div>
-            </a>
-
-            <div class="hidden md:flex items-center gap-4">
-                <a href="#services" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2">
-                    השירותים שלנו
-                </a>
-                <a href="#why-us" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2">
-                    למה איתנו?
-                </a>
-                <a href="#pricing-section" onclick="openPricingIfClosed()" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2 flex items-center gap-1">
-                    <span>מחירון</span>
-                    <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded border border-cyan-500/30">🏷️</span>
-                </a>
-                <a href="#faq" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors px-3 py-2">
-                    שאלות ותשובות
-                </a>
-
-                <div class="flex items-center gap-1.5 bg-slate-900/80 p-1.5 rounded-xl border border-white/10 text-xs text-gray-400 ml-2">
-                    <span class="text-[10px] px-1 font-bold">צבע:</span>
-                    <button onclick="setTheme('theme-cyber')" title="ניאון סייבר (ציאן וכתום)" class="w-5 h-5 rounded-full bg-gradient-to-r from-cyan-400 to-orange-500 hover:scale-110 transition-transform border border-white/20"></button>
-                    <button onclick="setTheme('theme-sunset')" title="שקיעה חמה (כתום ורוד)" class="w-5 h-5 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 hover:scale-110 transition-transform border border-white/20"></button>
-                    <button onclick="setTheme('theme-royal')" title="כחול מלכותי וזהב" class="w-5 h-5 rounded-full bg-gradient-to-r from-indigo-500 to-amber-400 hover:scale-110 transition-transform border border-white/20"></button>
-                </div>
-                
-                <a href="https://wa.me/972533453572?text=היי,%20אני%20מעוניין%20לשמוע%20פרטים%20על%20בניית%20אתר%20/%20דף%20נחיתה" 
-                   target="_blank"
-                   class="glass-panel px-4 py-2.5 rounded-xl text-sm font-bold text-cyan-300 hover:text-white border border-cyan-500/40 hover:border-cyan-400 flex items-center gap-2 transition-all hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]">
-                    <i class="fa-brands fa-whatsapp text-cyan-400 text-lg"></i>
-                    <span>שיחה בווצאפ</span>
-                </a>
-
-                <a href="#contact" class="gradient-btn-orange px-5 py-2.5 rounded-xl text-sm font-bold text-white shadow-lg flex items-center gap-2">
-                    <i class="fa-solid fa-rocket"></i>
-                    <span>השארת פרטים</span>
-                </a>
-            </div>
-
-            <div class="flex md:hidden items-center gap-2">
-                <a href="https://wa.me/972533453572?text=היי,%20אני%20מעוניין%20בלייעוץ%20דיגיטלי" 
-                   target="_blank" 
-                   class="gradient-btn-orange px-3.5 py-2 rounded-lg text-xs font-bold text-white flex items-center gap-1.5">
-                    <i class="fa-brands fa-whatsapp text-base"></i>
-                    <span>דבר איתי</span>
-                </a>
-            </div>
+    <!-- כותרת ראשית -->
+    <header id="top">
+        <div class="logo-container">
+            <img src="88.jpeg" alt="גטה י.ג.מ שיפוצים">
         </div>
+        <h1>גטה י.ג.מ - שיפוצים</h1>
+        <p class="slogan">שדרוג הבית, שיפור החיים. אנחנו כאן כדי להפוך את החלום שלכם למציאות!</p>
+        <a href="tel:0539627032" class="cta-btn">📞 חייגו עכשיו: 053-9627032</a>
+        <a href="https://wa.me/972539627032" class="cta-btn" style="background-color: #25d366; color: white;">💬 צרו קשר בוואטסאפ</a>
     </header>
 
-    <section class="relative pt-12 pb-20 md:pt-28 md:pb-36 z-10 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                
-                <div class="lg:col-span-7 text-center lg:text-right space-y-8 reveal-slide-right">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-cyan-500/40 text-cyan-300 text-xs sm:text-sm font-semibold animate-bounce-short shadow-xl">
-                        <span class="flex h-2.5 w-2.5 rounded-full bg-cyan-400 animate-ping"></span>
-                        <span>⚡ פתרונות דיגיטל מתקדמים לעסקים ולעצמאיים</span>
-                    </div>
+    <!-- אודות -->
+    <section id="about">
+        <h2>המומחיות שלנו היא הבית שלכם</h2>
+        <div class="about-box">
+            <p>חברת <strong>גטה י.ג.מ - שיפוצים</strong> מתמחה בביצוע עבודות שיפוצים ובנייה ברמה הגבוהה ביותר. אנו מאמינים שאיכות ללא פשרות, עמידה מדויקת בלוחות זמנים ושירות בגובה העיניים הם המפתחות לפרויקט מוצלח וללקוחות מרוצים.</p>
+            <p>אנו משתמשים בטכנולוגיות החדישות ביותר ובחומרים האיכותיים ביותר בשוק כדי להבטיח שהתוצאה הסופית לא רק תיראה מדהים, אלא גם תשרת אתכם נאמנה לאורך שנים רבות. בין אם מדובר בשיפוץ מקיף לדירה, עיצוב מטבח חלומות, חידוש חדרי רחצה או עבודות גמר וצבע – אנחנו מלווים אתכם מרגע התכנון הראשוני ועד למסירת המפתח בחיוך.</p>
+        </div>
+    </section>
 
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
-                        הופכים גולשים ללקוחות: <br>
-                        <span class="gradient-text">אתרים, דפי נחיתה ואוטומציות</span> שמוכרים בשבילך 24/7
-                    </h1>
-
-                    <p class="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-                        אנחנו בונים עבורך מעטפת דיגיטלית מלאה ברמת הייטק: עיצוב יוקרתי, טעינה במהירות שיא, ובוטים חכמים ל-WhatsApp שמחזירים אליך לידים חמים בזמן אמת.
-                    </p>
-
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                        <a href="#contact" class="w-full sm:w-auto gradient-btn-orange px-8 py-4 rounded-2xl text-base font-extrabold text-white flex items-center justify-center gap-3 shadow-2xl shadow-orange-500/30">
-                            <i class="fa-solid fa-bolt text-lg"></i>
-                            <span>קבל הצעת מחיר בלעדית</span>
-                        </a>
-
-                        <a href="https://wa.me/972533453572?text=היי,%20אני%20רוצה%20ייעוץ%20חינם%20לגבי%20העסק%20שלי" 
-                           target="_blank"
-                           class="w-full sm:w-auto glass-panel glass-panel-hover px-8 py-4 rounded-2xl text-base font-bold text-white flex items-center justify-center gap-3 border border-cyan-500/40">
-                            <i class="fa-brands fa-whatsapp text-cyan-400 text-xl"></i>
-                            <span>ייעוץ מהיר בווצאפ</span>
-                        </a>
-                    </div>
-
-                    <div class="pt-6 border-t border-white/10 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-gray-400">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-circle-check text-cyan-400"></i>
-                            <span>עיצוב מותאם אישית מאפס</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-circle-check text-orange-400"></i>
-                            <span>התאמה מושלמת לסלולר</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-circle-check text-purple-400"></i>
-                            <span>אינטגרציה מלאה לאוטומציה</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-5 relative reveal-slide-left">
-                    <div class="relative mx-auto max-w-md lg:max-w-none">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500/30 via-purple-600/30 to-orange-500/30 rounded-3xl blur-2xl pointer-events-none"></div>
-
-                        <div class="relative glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border border-white/15 shadow-2xl">
-                            <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                                    <div class="w-3 h-3 rounded-full bg-orange-500/80"></div>
-                                    <div class="w-3 h-3 rounded-full bg-cyan-500/80"></div>
-                                </div>
-                                <span class="text-[11px] font-mono text-cyan-400 bg-cyan-950/80 px-3 py-1 rounded-full border border-cyan-500/30">
-                                    SYSTEM STATUS: OPTIMIZED
-                                </span>
-                            </div>
-
-                            <div class="space-y-4">
-                                <div class="p-4 rounded-xl bg-white/5 border border-white/5 flex items-center gap-4 hover:border-cyan-500/40 transition-colors">
-                                    <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl font-bold shrink-0">
-                                        <i class="fa-solid fa-rocket"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-sm font-bold text-white">דף נחיתה ממוקד המרה</h4>
-                                        <p class="text-xs text-gray-400">תשתיות מהירות להבאת לידים איכותיים</p>
-                                    </div>
-                                </div>
-
-                                <div class="p-4 rounded-xl bg-white/5 border border-white/5 flex items-center gap-4 hover:border-orange-500/40 transition-colors">
-                                    <div class="w-12 h-12 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center text-xl font-bold shrink-0">
-                                        <i class="fa-solid fa-robot"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-sm font-bold text-white">אוטומציית WhatsApp חכמה</h4>
-                                        <p class="text-xs text-gray-400">מענה מיידי ללקוחות שמשאירים פרטים</p>
-                                    </div>
-                                </div>
-
-                                <div class="p-4 rounded-xl bg-white/5 border border-white/5 flex items-center gap-4 hover:border-purple-500/40 transition-colors">
-                                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl font-bold shrink-0">
-                                        <i class="fa-solid fa-id-card"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-sm font-bold text-white">כרטיס ביקור דיגיטלי חכם</h4>
-                                        <p class="text-xs text-gray-400">כל העסק שלך בקישור אחד נגיש</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="p-4 rounded-2xl bg-gradient-to-r from-cyan-950/60 to-orange-950/60 border border-cyan-500/30 flex justify-between items-center">
-                                <div>
-                                    <div class="text-2xl font-black text-white">+350%</div>
-                                    <div class="text-[11px] text-gray-300">עלייה בממוצע פניות מלקוחות</div>
-                                </div>
-                                <div class="text-cyan-400 font-bold text-xs bg-cyan-500/10 px-3 py-1.5 rounded-lg border border-cyan-500/20 flex items-center gap-1">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <span>תוצאה מוכחת</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+    <!-- למה לבחור בנו -->
+    <section id="features">
+        <h2>למה לבחור בנו?</h2>
+        <p class="section-intro">השקט הנפשי שלכם שווה ניהול מקצועי, אמין ובלתי מתפשר.</p>
+        <div class="features-list">
+            <div class="feature-item">
+                <p>🛡️ אחריות מלאה על כל עבודה</p>
+            </div>
+            <div class="feature-item">
+                <p>📋 ייעוץ והצעת מחיר מהירה</p>
+            </div>
+            <div class="feature-item">
+                <p>🤝 יחס אישי וליווי צמוד לכל לקוח</p>
+            </div>
+            <div class="feature-item">
+                <p>⭐ מחירים הוגנים ותנאים נוחים</p>
+            </div>
+            <div class="feature-item">
+                <p>🏆 שירות אמין ומקצועי ללא פשרות</p>
             </div>
         </div>
     </section>
 
-    <section id="services" class="py-20 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 reveal-slide-right">
-                <h2 class="text-xs font-extrabold tracking-widest text-cyan-400 uppercase">הפתרונות שלנו עבורך</h2>
-                <h3 class="text-3xl sm:text-4xl font-black text-white">כל הכלים הדיגיטליים במקום אחד</h3>
-                <p class="text-gray-400 text-base">מפתחים עבורך את המוצר המדויק שמתאים לגודל העסק והתקציב שלך.</p>
+    <!-- השירותים שלנו -->
+    <section id="services">
+        <h2>השירותים המובילים שלנו</h2>
+        <p class="section-intro">פתרונות הנדסיים ועיצוביים תחת קורת גג אחת, בהתאמה מלאה לצרכים שלכם.</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>עבודות ריצוף</h3>
+                <p>ריצוף מדויק, חיפויים יוקרתיים והקפדה על פלס, ישרות וגימורים מושלמים.</p>
             </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass-panel glass-panel-hover p-8 rounded-3xl relative group flex flex-col justify-between reveal-slide-right">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition-transform border border-cyan-500/20">
-                            <i class="fa-solid fa-laptop-code"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-3">דפי נחיתה ממירים</h4>
-                        <p class="text-sm text-gray-400 leading-relaxed mb-6">
-                            דף נחיתה בעיצוב ייחודי המיועד לקמפיינים. בנוי להגדיל אחוזי המרה, למגנט לקוחות ולגרום לגולש להשאיר פרטים.
-                        </p>
-                    </div>
-                    <ul class="space-y-2 text-xs text-gray-300 border-t border-white/10 pt-4">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> עיצוב הייטקיסטי מותאם</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> טעינה סופר-מהירה</li>
-                    </ul>
-                </div>
-
-                <div class="glass-panel glass-panel-hover p-8 rounded-3xl relative group flex flex-col justify-between reveal-slide-right">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition-transform border border-blue-500/20">
-                            <i class="fa-solid fa-globe"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-3">אתרי תדמית ועסקים</h4>
-                        <p class="text-sm text-gray-400 leading-relaxed mb-6">
-                            אתר אינטרנט מלא, מרשים ויוקרתי המציג את העסק שלך בצורה המקצועית ביותר. מותאם לחיפוש ולכל המכשירים.
-                        </p>
-                    </div>
-                    <ul class="space-y-2 text-xs text-gray-300 border-t border-white/10 pt-4">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> עמודים מרובים + בלוג/גלריה</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> התאמה מלאה ל-SEO</li>
-                    </ul>
-                </div>
-
-                <div class="glass-panel glass-panel-hover p-8 rounded-3xl relative group flex flex-col justify-between reveal-slide-left">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition-transform border border-purple-500/20">
-                            <i class="fa-solid fa-address-card"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-3">כרטיסי ביקור דיגיטליים</h4>
-                        <p class="text-sm text-gray-400 leading-relaxed mb-6">
-                            כרטיס חכם שיושב בנייד של הלקוחות שלך. כולל שמירת איש קשר בלחיצה, חיבור לרשתות, ניווט ישיר וטפסים.
-                        </p>
-                    </div>
-                    <ul class="space-y-2 text-xs text-gray-300 border-t border-white/10 pt-4">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> שמירת איש קשר בלחיצה</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> שיתוף מהיר ב-QR או קישור</li>
-                    </ul>
-                </div>
-
-                <div class="glass-panel glass-panel-hover p-8 rounded-3xl relative group flex flex-col justify-between border-orange-500/40 reveal-slide-left">
-                    <div class="absolute -top-3 right-6 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">
-                        ★ מומלץ לעסקים
-                    </div>
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition-transform border border-orange-500/20">
-                            <i class="fa-solid fa-gears"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-3">אוטומציות ובוט WhatsApp</h4>
-                        <p class="text-sm text-gray-400 leading-relaxed mb-6">
-                            חיבור הטופס היישר לוואטסאפ של הלקוח ולטלפון שלך. בוט אוטומטי שעונה 24/7, מתאם פגישות ושולח תזכורות.
-                        </p>
-                    </div>
-                    <ul class="space-y-2 text-xs text-gray-300 border-t border-white/10 pt-4">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> מענה מיידי לכל פנייה</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> סנכרון ל-CRM / Google Sheets</li>
-                    </ul>
-                </div>
+            <div class="service-card">
+                <h3>עבודות צבע</h3>
+                <p>צביעת דירות, שליכט צבעוני, שפכטל אמריקאי וגימורים נקיים ברמה הגבוהה ביותר.</p>
+            </div>
+            <div class="service-card">
+                <h3>עבודות אינסטלציה ואיטום</h3>
+                <p>החלפת תשתיות, פתרונות איטום מתקדמים למניעת רטיבויות והתקנת סניטריה.</p>
+            </div>
+            <div class="service-card">
+                <h3>עבודות גמר ועיצוב</h3>
+                <p>תקרות גבס מיוחדות, תאורה נסתרת, מטבחים ועיצוב פנים שמשדרג כל פינה בבית.</p>
             </div>
         </div>
     </section>
 
-    <section id="why-us" class="py-20 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-6 space-y-6 reveal-slide-right">
-                    <div class="inline-block px-3 py-1 rounded-lg bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold">
-                        למה שווה לך לפנות דווקא אלינו?
-                    </div>
-
-                    <h3 class="text-3xl sm:text-4xl font-black text-white leading-tight">
-                        אנחנו לא רק בונים אתר, <br>
-                        אנחנו יוצרים עבורך <span class="gradient-text-orange">מכונת פניות עובדת</span>
-                    </h3>
-
-                    <p class="text-gray-300 leading-relaxed font-light">
-                        כעצמאי או בעל עסק, הזמן שלך שווה כסף. רוב העסקים מפסידים לקוחות בגלל אתרים איטיים, עיצוב מיושן, או חוסר במענה מהיר בזמן שהלקוח חם.
-                    </p>
-
-                    <div class="space-y-4 pt-2">
-                        <div class="glass-panel p-4 rounded-2xl flex items-start gap-4 border-r-4 border-r-cyan-400">
-                            <div class="text-cyan-400 text-2xl pt-1">
-                                <i class="fa-solid fa-microchip"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-base font-bold text-white">עיצוב הייטק יוקרתי ומלא חיים</h4>
-                                <p class="text-xs text-gray-400">הלקוח שלך יקבל רושם ראשוני מטורף. המראה החדשני מבדל אותך מיד מכל המתחרים בתחום שלך.</p>
-                            </div>
-                        </div>
-
-                        <div class="glass-panel p-4 rounded-2xl flex items-start gap-4 border-r-4 border-r-orange-400">
-                            <div class="text-orange-400 text-2xl pt-1">
-                                <i class="fa-solid fa-comments"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-base font-bold text-white">תגובה בשניות עם אוטומציות WhatsApp</h4>
-                                <p class="text-xs text-gray-400">ברגע שלקוח מציץ בדף ונרשם, הוא מקבל הודעה אישית ישר לוואטסאפ. ככה סוגרים עסקאות במקום.</p>
-                            </div>
-                        </div>
-
-                        <div class="glass-panel p-4 rounded-2xl flex items-start gap-4 border-r-4 border-r-purple-400">
-                            <div class="text-purple-400 text-2xl pt-1">
-                                <i class="fa-solid fa-handshake"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-base font-bold text-white">יחס אישי מותאם במיוחד לעצמאיים</h4>
-                                <p class="text-xs text-gray-400">בלי מתווכים ובלי כאבי ראש. שיחה ישירה בגובה העיניים, זמינות גבוהה ומחיר הוגן.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pt-4">
-                        <a href="#contact" class="gradient-btn-orange inline-flex items-center gap-3 px-8 py-4 rounded-2xl text-white font-extrabold text-base shadow-xl">
-                            <span>בוא נזניק את העסק שלך היום</span>
-                            <i class="fa-solid fa-arrow-left"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-6 reveal-slide-left">
-                    <div class="glass-panel rounded-3xl p-8 border border-white/10 relative overflow-hidden space-y-8">
-                        <div class="text-center space-y-2">
-                            <span class="text-xs text-cyan-400 font-mono tracking-widest uppercase">תהליך העבודה הפשוט שלנו</span>
-                            <h4 class="text-2xl font-bold text-white">משיחת היכרות ועד דף באוויר</h4>
-                        </div>
-
-                        <div class="relative space-y-6 before:absolute before:inset-0 before:left-auto before:right-6 before:w-0.5 before:bg-gradient-to-b before:from-cyan-400 via-orange-500 before:to-purple-600">
-                            <div class="relative flex items-center gap-6 pr-2">
-                                <div class="w-10 h-10 rounded-full bg-cyan-400 text-black font-black flex items-center justify-center shrink-0 z-10 shadow-lg shadow-cyan-400/50">
-                                    1
-                                </div><div class="bg-white/5 p-4 rounded-xl border border-white/5 w-full">
-                                    <h5 class="text-sm font-bold text-white">אפיון ושיחת היכרות קצרה</h5>
-                                    <p class="text-xs text-gray-400">מבינים את הצרכים של העסק, קהל היעד והיעדים.</p>
-                                </div>
-                            </div>
-
-                            <div class="relative flex items-center gap-6 pr-2">
-                                <div class="w-10 h-10 rounded-full bg-orange-500 text-white font-black flex items-center justify-center shrink-0 z-10 shadow-lg shadow-orange-500/50">
-                                    2
-                                </div>
-                                <div class="bg-white/5 p-4 rounded-xl border border-white/5 w-full">
-                                    <h5 class="text-sm font-bold text-white">עיצוב ופיתוח ברמת הייטק</h5>
-                                    <p class="text-xs text-gray-400">בניית הדף/האתר במהירות, התאמה לנייד וחיבור אוטומציות.</p>
-                                </div>
-                            </div>
-
-                            <div class="relative flex items-center gap-6 pr-2">
-                                <div class="w-10 h-10 rounded-full bg-purple-500 text-white font-black flex items-center justify-center shrink-0 z-10 shadow-lg shadow-purple-500/50">
-                                    3
-                                </div>
-                                <div class="bg-white/5 p-4 rounded-xl border border-white/5 w-full">
-                                    <h5 class="text-sm font-bold text-white">עלייה לאוויר והתחלת קבלת לידים</h5>
-                                    <p class="text-xs text-gray-400">האתר באוויר, הבוטים מוכנים והפניות מגיעות ישר אליך.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- תהליך העבודה -->
+    <section id="process">
+        <h2>איך אנחנו עובדים איתכם?</h2>
+        <p class="section-intro">שקיפות מלאה לאורך כל הדרך – כך הופכים חלום למציאות בשלבים מסודרים:</p>
+        <div class="process-steps">
+            <div class="step-card">
+                <h4>1. שיחת היכרות וייעוץ</h4>
+                <p>שומעים את הצרכים, החלומות והתקציב שלכם, ומעניקים הכוונה מקצועית ראשונית.</p>
+            </div>
+            <div class="step-card">
+                <h4>2. הצעת מחיר מסודרת</h4>
+                <p>בניית תוכנית עבודה מפורטת ושקופה הכוללת את כל מרכיבי הפרויקט ללא הפתעות.</p>
+            </div>
+            <div class="step-card">
+                <h4>3. ביצוע ברמה הגבוהה</h4>
+                <p>עבודה מדויקת בשטח תוך שימוש בחומרים המובילים ביותר ועמידה בלוחות הזמנים.</p>
+            </div>
+            <div class="step-card">
+                <h4>4. מסירת פרויקט ואחריות</h4>
+                <p>בדיקה מדוקדקת של כל פינה, ניקיון יסודות ומסירת המפתח לבית החדש שלכם עם אחריות מלאה.</p>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section with Interactive Details Toggle -->
-    <section id="pricing-section" class="py-20 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass-panel rounded-3xl border border-cyan-500/30 overflow-hidden shadow-2xl">
-                
-                <!-- Toggle Header -->
-                <button id="pricingToggleBtn" onclick="togglePricingDetails()" class="w-full p-6 sm:p-8 flex items-center justify-between bg-slate-900/60 hover:bg-slate-800/80 transition-colors text-right group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl font-bold border border-cyan-500/30 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-tags"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest">שקיפות מלאה</span>
-                            <h3 class="text-2xl sm:text-3xl font-black text-white">מחירון שירותים וחבילות</h3>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span id="pricingToggleText" class="hidden sm:inline text-sm font-semibold text-gray-400 group-hover:text-cyan-300">לחץ להצגת הצעות המחיר</span>
-                        <div id="pricingToggleIcon" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-cyan-400 border border-white/10 transition-transform duration-300">
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                    </div>
-                </button>
-
-                <!-- Collapsible Pricing Content -->
-                <div id="pricingContent" class="hidden p-6 sm:p-8 border-t border-white/10 bg-slate-950/40">
-                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        
-                        <!-- Tier 1: START -->
-                        <div class="glass-panel p-6 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-cyan-400/50 transition-colors">
-                            <div>
-                                <div class="text-xs font-bold text-cyan-400 mb-1">חבילת START</div>
-                                <h4 class="text-xl font-bold text-white mb-2">כרטיס ביקור דיגיטלי</h4>
-                                <div class="text-2xl font-black text-white my-3">מ-400 ₪ <span class="text-xs font-normal text-gray-400">עד 800 ₪</span></div>
-                                <p class="text-xs text-gray-400 mb-4">נוכחות דיגיטלית מהירה, קלה ומקצועית בסלולר.</p>
-                                <ul class="space-y-2 text-xs text-gray-300">
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> שמירת איש קשר בלחיצה</li>
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> קישורים לרשתות חברתיות</li>
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> כפתור חיוג וניווט מהיר</li>
-                                </ul>
-                            </div>
-                            <a href="#contact" onclick="selectPackage('כרטיס ביקור דיגיטלי')" class="mt-6 w-full py-2.5 rounded-xl border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/10 text-center text-xs font-bold transition-all">בחַר חבילה זו</a>
-                        </div>
-
-                        <!-- Tier 2: BUSINESS -->
-                        <div class="glass-panel p-6 rounded-2xl border border-orange-500/40 flex flex-col justify-between relative hover:border-orange-400 transition-colors">
-                            <div class="absolute -top-3 right-4 bg-orange-500 text-white font-black text-[9px] px-2.5 py-0.5 rounded-full">פופולרי</div>
-                            <div>
-                                <div class="text-xs font-bold text-orange-400 mb-1">חבילת BUSINESS</div>
-                                <h4 class="text-xl font-bold text-white mb-2">דף נחיתה ממוקד</h4>
-                                <div class="text-2xl font-black text-white my-3">מ-1,200 ₪ <span class="text-xs font-normal text-gray-400">עד 2,500 ₪</span></div>
-                                <p class="text-xs text-gray-400 mb-4">מכונת לידים לקמפיינים ממוקדי המרה.</p>
-                                <ul class="space-y-2 text-xs text-gray-300">
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> עיצוב הייטקיסטי מותאם</li>
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> טופס לכידת לידים</li>
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> חיבור ראשוני לוואטסאפ</li>
-                                </ul>
-                            </div>
-                            <a href="#contact" onclick="selectPackage('דף נחיתה ממוקד')" class="mt-6 w-full py-2.5 rounded-xl gradient-btn-orange text-white text-center text-xs font-bold transition-all shadow-lg">בחַר חבילה זו</a>
-                        </div>
-
-                        <!-- Tier 3: FLOW -->
-                        <div class="glass-panel p-6 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-purple-400/50 transition-colors">
-                            <div>
-                                <div class="text-xs font-bold text-purple-400 mb-1">חבילת FLOW</div>
-                                <h4 class="text-xl font-bold text-white mb-2">אתר תדמית ועסק</h4>
-                                <div class="text-2xl font-black text-white my-3">מ-2,500 ₪ <span class="text-xs font-normal text-gray-400">עד 5,000 ₪</span></div>
-                                <p class="text-xs text-gray-400 mb-4">אתר אינטרנט מלא ומקיף להצגת העסק שלך.</p>
-                                <ul class="space-y-2 text-xs text-gray-300">
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> עמודים מרובים + גלריה</li>
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> אופטימיזציה ל-SEO</li>
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> התאמה מלאה למובייל</li>
-                                </ul>
-                            </div>
-                            <a href="#contact" onclick="selectPackage('אתר תדמית ועסק')" class="mt-6 w-full py-2.5 rounded-xl border border-purple-500/40 text-purple-300 hover:bg-purple-500/10 text-center text-xs font-bold transition-all">בחַר חבילה זו</a>
-                        </div>
-
-                        <!-- Tier 4: PRO -->
-                        <div class="glass-panel p-6 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-blue-400/50 transition-colors">
-                            <div>
-                                <div class="text-xs font-bold text-blue-400 mb-1">חבילת PRO</div>
-                                <h4 class="text-xl font-bold text-white mb-2">אוטומציות ובוטים</h4>
-                                <div class="text-2xl font-black text-white my-3">מ-800 ₪ <span class="text-xs font-normal text-gray-400">עד 3,000 ₪</span></div>
-                                <p class="text-xs text-gray-400 mb-4">מערכות אוטומטיות לחיסכון בזמן ותגובה מיידית.</p>
-                                <ul class="space-y-2 text-xs text-gray-300">
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> בוט WhatsApp חכם</li>
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> סנכרון ל-CRM / Sheets</li>
-                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> תזכורות ופולו-אפ אוטומטי</li>
-                                </ul>
-                            </div>
-                            <a href="#contact" onclick="selectPackage('אוטומציות ובוטים')" class="mt-6 w-full py-2.5 rounded-xl border border-blue-500/40 text-blue-300 hover:bg-blue-500/10 text-center text-xs font-bold transition-all">בחַר חבילה זו</a>
-                        </div>
-
-                    </div>
-                </div>
+    <!-- גלריית תמונות -->
+    <section id="gallery">
+        <h2>גלריית תמונות - תוצאות מהשטח</h2>
+        <p class="section-intro">הצצה אל חלק מהפרויקטים והעבודות שביצענו עבור לקוחותינו המרוצים.</p>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="4.jpeg" alt="מטבח מעוצב יוקרתי">
+                <div class="gallery-desc">מטבח מעוצב - תוצאה סופית</div>
+            </div>
+            <div class="gallery-item">
+                <img src="9.jpeg" alt="חדר רחצה מעוצב">
+                <div class="gallery-desc">חדר רחצה יוקרתי ומודרני</div>
+            </div>
+            <div class="gallery-item">
+                <img src="7.jpeg" alt="תקרת גבס ותאורה נסתרת">
+                <div class="gallery-desc">עבודות גבס ותאורה מתקדמות</div>
+            </div>
+            <div class="gallery-item">
+                <img src="8.jpeg" alt="מטבח כהה בעיצוב מודרני">
+                <div class="gallery-desc">עיצוב מטבחים ברמה הגבוהה ביותר</div>
+            </div>
+            <div class="gallery-item">
+                <img src="2.jpeg" alt="חיפוי קירות ומקלחת">
+                <div class="gallery-desc">עבודות איטום וחיפוי מקלחות</div>
+            </div>
+            <div class="gallery-item">
+                <img src="3.jpeg" alt="שלב האיטום בתהליך">
+                <div class="gallery-desc">הקפדה על יסודות ואיטום מקצועי</div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-20 relative z-10">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 space-y-3">
-                <h2 class="text-xs font-extrabold tracking-widest text-cyan-400 uppercase">כל מה שרצית לדעת</h2>
-                <h3 class="text-3xl font-black text-white">שאלות ותשובות נפוצות</h3>
+    <!-- סרטונים -->
+    <section id="videos">
+        <h2>סרטוני פרויקטים</h2>
+        <p class="section-intro">ראו אותנו עובדים בשטח, מקפידים על כל פרט קטן ומציגים תוצאות מושלמות.</p>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <video controls>
+                    <source src="WhatsApp Video 2026-09-19 at 21.20.54.mp4" type="video/mp4">
+                    הדפדפן שלך לא תומך בנגן וידאו.
+                </video>
+                <div class="gallery-desc">הצצה מתהליך העבודה בשטח</div>
             </div>
-
-            <div class="space-y-4">
-                <details class="glass-panel rounded-2xl p-6 group transition-all">
-                    <summary class="flex items-center justify-between font-bold text-lg text-white cursor-pointer list-none">
-                        <span>כמה זמן לוקח לבנות דף נחיתה או אתר?</span>
-                        <span class="text-cyan-400 group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
-                    </summary>
-                    <p class="mt-4 text-sm text-gray-300 font-light leading-relaxed">
-                        דף נחיתה או כרטיס ביקור דיגיטלי מוכן בדרך כלל תוך 3 עד 5 ימי עסקים בלבד. אתרי תדמית מורכבים יותר לוקחים בין 7 ל-14 ימי עסקים, כולל התאמות ואישור מצידך.
-                    </p>
-                </details>
-
-                <details class="glass-panel rounded-2xl p-6 group transition-all">
-                    <summary class="flex items-center justify-between font-bold text-lg text-white cursor-pointer list-none">
-                        <span>מה זו האוטומציה ל-WhatsApp ואיך היא עוזרת לי?</span>
-                        <span class="text-cyan-400 group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
-                    </summary>
-                    <p class="mt-4 text-sm text-gray-300 font-light leading-relaxed">
-                        ברגע שלקוח מציץ בדף ונרשם, המערכת שולחת לו הודעה אישית ישר לוואטסאפ בשניות הראשונות. מענה מיידי מעלה דרמטית את סיכויי הסגירה.
-                    </p>
-                </details>
-
-                <details class="glass-panel rounded-2xl p-6 group transition-all">
-                    <summary class="flex items-center justify-between font-bold text-lg text-white cursor-pointer list-none">
-                        <span>האם האתר מותאם למכשירי נייד (סלולר)?</span>
-                        <span class="text-cyan-400 group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
-                    </summary>
-                    <p class="mt-4 text-sm text-gray-300 font-light leading-relaxed">
-                        לחלוטין. רוב התנועה כיום מגיעה מהסלולר, ולכן העיצוב נבנה בגישת Mobile-First עם טעינה מהירה במיוחד וחוויית משתמש חלקה.
-                    </p>
-                </details>
+            <div class="gallery-item">
+                <video controls>
+                    <source src="WhatsApp Video 2026-09-19 at 21.20.44.mp4" type="video/mp4">
+                    הדפדפן שלך לא תומך בנגן וידאו.
+                </video>
+                <div class="gallery-desc">סיור בדירה לאחר שיפוץ מלא</div>
             </div>
         </div>
     </section>
 
-    <!-- Main Contact Form Section -->
-    <section id="contact" class="py-20 relative z-10">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-cyan-500/40 relative overflow-hidden shadow-2xl">
-                <div class="text-center space-y-4 mb-8">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-bold border border-cyan-500/30">
-                        <i class="fa-solid fa-envelope-open-text"></i>
-                        <span>צור קשר עכשיו</span>
-                    </div>
-                    <h3 class="text-3xl sm:text-4xl font-black text-white">בוא נתחיל לבנות את האתר שלך</h3>
-                    <p class="text-gray-300 text-sm">מלא את הפרטים ונחזור אליך תוך זמן קצר עם הצעת מחיר מדויקת.</p>
-                </div>
-
-                <form id="leadForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
-                    <div class="grid sm:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-300 mb-2">שם מלא *</label>
-                            <input type="text" id="formName" required placeholder="ישראל ישראלי" class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-cyan-400 focus:outline-none transition-colors">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-300 mb-2">מספר טלפון / WhatsApp *</label>
-                            <input type="tel" id="formPhone" required placeholder="050-0000000" class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-cyan-400 focus:outline-none transition-colors">
-                        </div>
-                    </div>
-
-                    <div class="grid sm:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-300 mb-2">שם העסק / תחום עיסוק</label>
-                            <input type="text" id="formBusiness" placeholder="למשל: ייעוץ עסקי / חנות אונליין" class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-cyan-400 focus:outline-none transition-colors">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-300 mb-2">שירות מבוקש</label>
-                            <select id="formService" class="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-cyan-400 focus:outline-none transition-colors">
-                                <option value="דף נחיתה ממוקד">דף נחיתה ממוקד</option>
-                                <option value="אתר תדמית ועסק">אתר תדמית ועסק</option>
-                                <option value="כרטיס ביקור דיגיטלי">כרטיס ביקור דיגיטלי</option>
-                                <option value="אוטומציות ובוטים">אוטומציות ובוט WhatsApp</option>
-                                <option value="פתרון מותאם אישית">פתרון מותאם אישית</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button type="submit" id="submitBtn" class="w-full gradient-btn-orange py-4 rounded-xl text-white font-extrabold text-base shadow-xl flex items-center justify-center gap-2 transition-all">
-                        <i class="fa-solid fa-paper-plane"></i>
-                        <span>שלח פנייה לקבלת הצעת מחיר</span>
-                    </button>
-
-                    <div id="formStatus" class="hidden text-center text-sm font-bold p-4 rounded-xl"></div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-8 border-t border-white/10 relative z-10 text-center text-xs text-gray-500">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-                © 2026 <span class="text-white font-bold">I.M FLOW</span>. כל הזכויות שמורות.
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="#privacy" class="hover:text-cyan-400 transition-colors">מדיניות פרטיות</a>
-                <span>•</span>
-                <a href="#terms" class="hover:text-cyan-400 transition-colors">תקנון אתר</a>
-            </div>
-        </div>
+    <!-- יצירת קשר -->
+    <footer id="contact">
+        <h2>מוכנים לשדרג את הבית?</h2>
+        <p>פנו אלינו עוד היום לקבלת הצעה מחיר משתלמת וללא התחייבות!</p>
+        <a href="tel:0539627032" class="phone-big">053-9627032</a>
+        <br>
+        <a href="https://wa.me/972539627032" class="cta-btn" style="background-color: #25d366; color: white; margin-top: 15px;">💬 שלחו הודעת וואטסאפ</a>
+        <p style="margin-top: 30px; color: #777;">© כל הזכויות שמורות לגטה י.ג.מ - שיפוצים</p>
     </footer>
 
-    <!-- Accessibility Widget -->
-    <div class="fixed bottom-6 right-6 z-50">
-        <button onclick="toggleAccMenu()" class="w-12 h-12 rounded-full bg-cyan-500 text-slate-950 font-bold flex items-center justify-center shadow-2xl border-2 border-white hover:scale-110 transition-transform" title="סרגל נגישות">
-            <i class="fa-solid fa-universal-access text-2xl"></i>
-        </button>
-
-        <div id="accMenu" class="hidden absolute bottom-16 right-0 w-64 glass-panel p-4 rounded-2xl border border-cyan-500/40 shadow-2xl space-y-3 text-right">
-            <div class="text-xs font-bold text-cyan-400 border-b border-white/10 pb-2 flex justify-between items-center">
-                <span>תפריט נגישות</span>
-                <button onclick="toggleAccMenu()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <button onclick="toggleAccClass('acc-large-text')" class="w-full text-right text-xs py-2 px-3 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center gap-2">
-                <i class="fa-solid fa-text-height text-cyan-400"></i> הגדלת טקסט
-            </button>
-            <button onclick="toggleAccClass('acc-high-contrast')" class="w-full text-right text-xs py-2 px-3 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-half-stroke text-cyan-400"></i> ניגודיות גבוהה
-            </button>
-            <button onclick="toggleAccClass('acc-grayscale')" class="w-full text-right text-xs py-2 px-3 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center gap-2">
-                <i class="fa-solid fa-eye-slash text-cyan-400"></i> גווני אפור
-            </button>
-            <button onclick="toggleAccClass('acc-underline-links')" class="w-full text-right text-xs py-2 px-3 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center gap-2">
-                <i class="fa-solid fa-link text-cyan-400"></i> הדגשת קישורים
-            </button>
-            <button onclick="resetAcc()" class="w-full text-center text-xs py-1.5 rounded-lg bg-red-500/20 text-red-300 hover:bg-red-500/30 font-bold border border-red-500/30 mt-2">
-                איפוס נגישות
-            </button>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script>
-        // GOOGLE SHEETS WEBHOOK INTEGRATION
-        const GOOGLE_SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxvv9rM2_vulG-OqiAb4xosbaPqFvK_wm5SH3PGdKODnGwHToPblYhgRutfDjpxAI-ljA/exec';
-
-        async function handleFormSubmit(e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById('submitBtn');
-            const statusDiv = document.getElementById('formStatus');
-
-            const formData = {
-                date: new Date().toLocaleString('he-IL'),
-                name: document.getElementById('formName').value,
-                phone: document.getElementById('formPhone').value,
-                business: document.getElementById('formBusiness').value || 'לא צוין',
-                service: document.getElementById('formService').value
-            };
-
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> שולח נתונים...';
-
-            try {
-                if (GOOGLE_SHEETS_WEBHOOK_URL && GOOGLE_SHEETS_WEBHOOK_URL !== 'YOUR_GOOGLE_SHEETS_WEBHOOK_URL_HERE') {
-                    await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(formData)
-                    });
-                }
-
-                statusDiv.className = 'text-center text-sm font-bold p-4 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
-                statusDiv.innerHTML = '✓ הפנייה נשלחה בהצלחה! נחזור אליך בהקדם.';
-                statusDiv.classList.remove('hidden');
-                document.getElementById('leadForm').reset();
-            } catch (err) {
-                statusDiv.className = 'text-center text-sm font-bold p-4 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-500/40';
-                statusDiv.innerHTML = 'הייתה שגיאה בשליחה. אנא פנה אלינו בווצאפ.';
-                statusDiv.classList.remove('hidden');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> שלח פנייה לקבלת הצעת מחיר';
-            }
-        }
-
-        function togglePricingDetails() {
-            const content = document.getElementById('pricingContent');
-            const text = document.getElementById('pricingToggleText');
-            const icon = document.getElementById('pricingToggleIcon');
-
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                text.textContent = 'הסתר מחירון';
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                content.classList.add('hidden');
-                text.textContent = 'לחץ להצגת הצעות המחיר';
-                icon.style.transform = 'rotate(0deg)';
-            }
-        }
-
-        function openPricingIfClosed() {
-            const content = document.getElementById('pricingContent');
-            if (content.classList.contains('hidden')) {
-                togglePricingDetails();
-            }
-        }
-
-        function selectPackage(packageName) {
-            const select = document.getElementById('formService');
-            if (select) {
-                select.value = packageName;
-            }
-        }
-
-        function setTheme(themeName) {
-            document.body.className = themeName + ' relative antialiased selection:bg-cyan-400 selection:text-black';
-        }
-
-        function toggleAccMenu() {
-            document.getElementById('accMenu').classList.toggle('hidden');
-        }
-
-        function toggleAccClass(className) {
-            document.body.classList.toggle(className);
-        }
-
-        function resetAcc() {
-            document.body.classList.remove('acc-large-text', 'acc-high-contrast', 'acc-grayscale', 'acc-underline-links');
-        }
-
-        // Particle Canvas Background Animation
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.color = Math.random() > 0.5 ? '#00f0ff' : '#ff6b00';
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < 40; i++) {
-            particles.push(new Particle());
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        // Scroll reveal on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal-active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal-slide-right, .reveal-slide-left').forEach(el => observer.observe(el));
-    </script>
 </body>
 </html>
